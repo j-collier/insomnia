@@ -1,0 +1,21 @@
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get upgrade --assume-yes
+RUN apt-get install --assume-yes \
+    libcurl4-openssl-dev \
+    git-all \
+    icnsutils \
+    graphicsmagick \
+    build-essential \
+    curl
+
+RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install --assume-yes nodejs
+RUN npm install 7zip-bin-linux
+
+ADD packages/insomnia-app /app
+WORKDIR /app
+RUN npm install
+
+VOLUME /app/dist
+CMD npm run package

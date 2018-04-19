@@ -1,0 +1,29 @@
+FROM ubuntu:16.04
+
+# Install core dependencies
+RUN apt-get update && \
+    apt-get upgrade --assume-yes && \
+    apt-get install --assume-yes \
+        libcurl4-openssl-dev \
+        snapcraft \
+        git-all \
+        icnsutils \
+        graphicsmagick \
+        build-essential \
+        curl
+
+# Install Node
+RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get install --assume-yes nodejs
+
+# Install dependencies
+ADD packages/insomnia-app/package.json /app/package.json
+ADD packages/insomnia-app/package-lock.json /app/package-lock.json
+WORKDIR /app
+RUN npm install && npm install --no-save 7zip-bin-linux app-builder-bin-linux
+
+# Add rest of code
+ADD packages/insomnia-app /app
+VOLUME /app/dist
+
+CMD npm run package

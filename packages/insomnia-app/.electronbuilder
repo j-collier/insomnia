@@ -40,6 +40,7 @@
     "synopsis": "A simple, beautiful, and free REST API client",
     "category": "Development",
     "target": [
+      "snap",
       "AppImage",
       "deb",
       "tar.gz"
@@ -56,7 +57,7 @@
       "libappindicator1",
       "libxtst6",
       "libnss3",
-      "libcurl3"
+      "libcurl3 | libcurl4"
     ]
   }
 }

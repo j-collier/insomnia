@@ -1,0 +1,20 @@
+version: '3'
+services:
+  deb:
+    build:
+      dockerfile: Dockerfile__16.04
+      context: .
+    volumes:
+      - ./packages/insomnia-app/dist:/app/dist
+  deb18:
+    build:
+      dockerfile: Dockerfile__18.04
+      context: .
+    volumes:
+      - ./packages/insomnia-app/dist:/app/dist
+  snap:
+    build:
+      dockerfile: Dockerfile__snap
+      context: .
+    volumes:
+      - ./packages/insomnia-app/dist:/app/dist
