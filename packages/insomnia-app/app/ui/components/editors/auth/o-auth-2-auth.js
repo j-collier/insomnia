@@ -155,6 +155,11 @@ class OAuth2Auth extends React.PureComponent<Props, State> {
     this._handleChangeProperty('password', value);
   }
 
+  // WIP
+  _handleChangeTokenPrefixOptions (e: SyntheticEvent<HTMLInputElement>): void {
+    this._handleChangeProperty('tokenPrefixOptions', e.currentTarget.value === 'default');
+  }
+
   _handleChangeTokenPrefix (value: string): void {
     this._handleChangeProperty('tokenPrefix', value);
   }
@@ -297,6 +302,18 @@ class OAuth2Auth extends React.PureComponent<Props, State> {
       'Password',
       'password',
       this._handleChangePassword
+    );
+
+    const tokenPrefixOptions = this.renderSelectRow(
+      'Token Prefix Options',
+      'tokenPrefixOptions',
+      [
+        {name: 'Default (Bearer)', value: 'Bearer'},
+        {name: 'Custom', value: 'custom'},
+        {name: 'None', value: 'none'}
+      ],
+      this._handleChangeTokenPrefixOptions,
+      'Whether to set the token prefix to Bearer, a custom value or nothing at all'
     );
 
     const tokenPrefix = this.renderInputRow(
